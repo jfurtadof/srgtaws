@@ -2,11 +2,10 @@
 var base_url = "http://ws.audioscrobbler.com/2.0/"
 
 // chave API
-var apikey = "d12e1581683ed053db4bbe44c615ac37";
+var apikey = "5a429fc03f1015f9fe983a57b5d54e97";
 
 // URL base para pedidos à API do Last.fm - concatenar em cada pedido com nome do método a invocar e parâmetros do mesmo
-var base_request = "http://ws.audioscrobbler.com/2.0/?api_key=d12e1581683ed053db4bbe44c615ac37&format=json&method=";
-
+var base_request = "http://ws.audioscrobbler.com/2.0/?api_key=5a429fc03f1015f9fe983a57b5d54e97&format=json&method=";
 
 // Nome do utilizador a analisar
 var username;
@@ -26,9 +25,7 @@ function getUserInfo()
         format: "json"
     };
 
-		alert ("antes do ajax");
-    $.get(base_url, data).done(processUserInfo).fail(logError("obter info do utilizador "+username));
-		alert(username);
+    $.get(base_url, data).done(processUserInfo);
 }
 
 
@@ -53,8 +50,11 @@ function processUserInfo(info)
 	var url = info.user.url;
 	var local = info.user.country;
 
-	//var tabela = document.getElementById("tabela");
+	var tabela = document.getElementById("tabela");
 	//$('#tabela').html("<a href='"+url+"'>"+name+"</a><br>"+age+" years old<table></table>");
+	$('#tabela').html("<p>"+name+"</p>");
+	alert("po");
+//	alert(age);
 
 	}
 }
