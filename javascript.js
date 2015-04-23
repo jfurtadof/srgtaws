@@ -2,7 +2,7 @@
 var base_url = "http://ws.audioscrobbler.com/2.0/"
 
 // chave API
-var apikey = "d12e1581683ed053db4bbe44c615ac37";
+var apikey = "772jgakxbfujas";
 
 // URL base para pedidos à API do Last.fm - concatenar em cada pedido com nome do método a invocar e parâmetros do mesmo
 var base_request = "http://ws.audioscrobbler.com/2.0/?api_key=d12e1581683ed053db4bbe44c615ac37&format=json&method=";
@@ -36,12 +36,12 @@ var tamanho2;
 
 
 function addCenas(b,v,a,tamanho,tamanhoV,tamanho2){
-	proc = Processing.getInstanceById('pjs2');	
+	proc = Processing.getInstanceById('pjs2');
 	proc.enche(b,v,a,tamanho,tamanhoV,tamanho2);
 }
 
 function recebeLink(){
-	proc = Processing.getInstanceById('pjs2');	
+	proc = Processing.getInstanceById('pjs2');
 	var li = proc.mandaLink();
 	return li;
 }
@@ -54,7 +54,7 @@ function recebeLink(){
 
 /*
 function recebeEstado(){
-	proc = Processing.getInstanceById('pjs2');	
+	proc = Processing.getInstanceById('pjs2');
 	estado2 = proc.mandaEstado();
 	return estado2;
 }
@@ -95,7 +95,7 @@ function transEstado(estado2){
 		alert("oi");
 		window.location.assign(google.com);
 		estado2 = false;
-		proc = Processing.getInstanceById('pjs2');	
+		proc = Processing.getInstanceById('pjs2');
 		proc.esTransformado(estado2);
 	}
 }
@@ -114,7 +114,7 @@ var f = new Array();
 var t = new Array();
 
 function addCenas2(f,t){
-	proc2 = Processing.getInstanceById('pjs4');	
+	proc2 = Processing.getInstanceById('pjs4');
 	proc2.enche2(f,t);
 }
 
@@ -134,8 +134,8 @@ $(document).ready(function(){
 		var artistaB = proc.mandaEstadoB();
 		var pessoaV = proc.mandaEstadoV();
 		var amigoA = proc.mandaAmigoA();
-		
-		
+
+
 		for (var i = 0; i < b.length; i++){
 			if(proc.mandaEstadoB() == b[i]){
 				vaiArtist(artistaB);
@@ -146,7 +146,7 @@ $(document).ready(function(){
 			else if(proc.mandaAmigoA() == a[i]){
 				vaiAmigo(amigoA);
 			}
-		}	 	
+		}
 	});
 });
 
@@ -178,7 +178,7 @@ function getUserInfo()
         user: username,
         format: "json"
     };
-    
+
     $.get(base_url, data).done(processUserInfo).fail(logError("obter info do utilizador "+username));
 
     getUserFriends(1);
@@ -203,10 +203,10 @@ function processUserInfo(info)
 
 	//var tabela = document.getElementById("tabela");
 	$('#tabela').html("<a href='"+url+"'>"+name+"</a><br>"+age+" years old<table></table>");
-	
+
 	}
 
-	
+
 }
 
 
@@ -357,7 +357,7 @@ function processUserNeighbours(data)
 
 
 
-//-----------------------------------------------BANDAS MAIS OUVIDAS 
+//-----------------------------------------------BANDAS MAIS OUVIDAS
 
 function getTopArtists(pageNumber)
 {
@@ -369,7 +369,7 @@ function getTopArtists(pageNumber)
 	};
 
 	$.get(base_url, data).done(processTopArtists).fail(logError("Bandas mais ouvidas por "+username));
-	
+
 }
 
 
@@ -425,40 +425,40 @@ function processTopArtists(data)
 
 
 		if (tamanho2 > 0 && tamanho2 < 300){
-			tamanho2 = 70; 
+			tamanho2 = 70;
 		}
 		else if (tamanho2 > 301 && tamanho2 < 600){
-			tamanho2 = 80; 
+			tamanho2 = 80;
 		}
 		else if (tamanho2 > 601 && tamanho2 < 900){
-			tamanho2 = 90; 
+			tamanho2 = 90;
 		}
 		else if (tamanho2 > 901 && tamanho2 < 1200){
-			tamanho2 = 100; 
+			tamanho2 = 100;
 		}
 		else if (tamanho2 > 1201 && tamanho2 < 1500){
-			tamanho2 = 120; 
+			tamanho2 = 120;
 		}
 		else if (tamanho2 > 1501 && tamanho2 < 1800){
-			tamanho2 = 130; 
+			tamanho2 = 130;
 		}
 		else if (tamanho2 > 1801 && tamanho2 < 2100){
-			tamanho2 = 140; 
+			tamanho2 = 140;
 		}
 		else if (tamanho2 > 2101 && tamanho2 < 2400){
-			tamanho2 = 150; 
+			tamanho2 = 150;
 		}
 		else if (tamanho2 > 2401 && tamanho2 < 2700){
-			tamanho2 = 160; 
+			tamanho2 = 160;
 		}
 		else if (tamanho2 > 2701 && tamanho2 < 3000){
-			tamanho2 = 180; 
+			tamanho2 = 180;
 		}
 		else if (tamanho2 > 3001 && tamanho2 < 3300){
-			tamanho2 = 190; 
+			tamanho2 = 190;
 		}
 		else if (tamanho2 > 3301 && tamanho2 < 3600){
-			tamanho2 = 200; 
+			tamanho2 = 200;
 		}
 		else{
 			tamanho2 = 130;
@@ -466,7 +466,7 @@ function processTopArtists(data)
 	}
 
 	//document.getElementById('topartists').innerHTML = list + '</ol>';
-	addCenas(b,v,a,tamanho,tamanhoV,tamanho2); 
+	addCenas(b,v,a,tamanho,tamanhoV,tamanho2);
 }
 
 
@@ -486,7 +486,7 @@ function processTopArtists(data)
 
 
 
-//-----------------------------------------------TAGS 
+//-----------------------------------------------TAGS
 
 function getTopTags()
 {
@@ -498,7 +498,7 @@ function getTopTags()
 	};
 
 	$.get(base_url, data).done(processTopTags).fail(logError("generos mais ouvidos por "+username));
-	
+
 }
 
 function processTopTags(data)
@@ -560,8 +560,8 @@ function searching()
 	//$("#procura").hide();
 	//$(".load").show();
 	//$("#status").empty();
-	
-	log("Procurando informação sobre " + username); 
+
+	log("Procurando informação sobre " + username);
 }
 
 function searchAgain()
@@ -577,74 +577,10 @@ function searchAgain()
 	$("#tabela>table").append("<tr><th>Amigo</th><th>Pontuação</th></tr>");
 	for(nome in amigos)
 		$("#tabela>table").append("<tr><td>" + nome + "</td><td>" + amigos[nome] + "</td></tr>");
-		
+
 	$("#tabela>table>tbody>tr>*").css("border", "1px solid");
 	$("#tabela>table>tbody>tr>td:first-child").width("150px");
 	$("#tabela>table>tbody>tr>td:last-child").width("60px");
 }
 
 */
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
