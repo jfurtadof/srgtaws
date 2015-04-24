@@ -20,3 +20,17 @@
 	height: auto;
 	outline: none
 }
+
+body{
+	background-color:#b42323;
+}
+
+.corpo a{
+	text-decoration: none;
+	color: rgba(255,255,255,1);
+}
+
+.teamlogo img{
+	width: 400px;
+	height: 80px;
+}
