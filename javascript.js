@@ -18,17 +18,17 @@ var banda;
 
 function getUserInfo(){
 	var data = {
-        api_key: apikey,
-        method: "user.getInfo",
-        user: username,
-        format: "json"
-    };
+		api_key: apikey,
+		method: "user.getInfo",
+		user: username,
+		format: "json"
+	};
 
-  $.get(base_url, data).done(processUserInfo);
+	$.get(base_url, data).done(processUserInfo);
 }
 
 function logError() {
-alert("nop");
+	alert("nop");
 }
 
 function log () {
@@ -36,21 +36,46 @@ function log () {
 }
 
 function processUserInfo(info){
-if(info.error){
+	if(info.error){
 		log("Erro: "+info.message);
 		searchAgain();
 	}
 	else{
 
-	var name = info.user.name;
-	var age = info.user.age;
-	var url = info.user.url;
-	var local = info.user.country;
+		var name = info.user.name;
+		var age = info.user.age;
+		var url = info.user.url;
+		var local = info.user.country;
 
-	var tabela = document.getElementById("tabela");
-	var formulario = document.getElementById("formulario");
+		var tabela = document.getElementById("tabela");
+		var formulario = document.getElementById("formulario");
 
-	$('#formulario').css('display', 'none');	
-	$('#tabela').html("<a href='"+url+"'>"+name+"</a><br>"+age+" years old<table></table>");
+		$('#formulario').css('display', 'none');
+		$('#tabela').html("<a href='"+url+"'>"+name+"</a><br>"+age+" years old<table></table>");
+	}
 }
+
+var proc;
+
+var amigos = new Array();
+var topTracks = new Array();
+var playlists = new Array();
+var topArtists = new Array();
+var w = new Array();
+var h = new Array();
+
+
+function addData(){
+	proc = Processing.getInstanceById('pjs');
+	proc.teste();
+//	proc.atualizaDados(amigos, topTracks, playlists, topArtists, w, h);
 }
+
+/*
+function receiveProc(){
+	proc = Processing.getInstanceById('pjs');
+	var link = proc.mandaLink();
+	return link;
+	alert("iiii");
+
+}*/
