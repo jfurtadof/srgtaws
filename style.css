@@ -1,18 +1,15 @@
 #tabela{
 	display: block;
-	position:absolute;
 	z-index: 0;
-
+	width: 300px;
 }
-
 
 #toPjs{
 	display:none;
-    position:absolute;
-    overflow:hidden;
+	overflow:hidden;
 	z-index: 0;
-	width:500px;
-	height:500px;
+	width:800px;
+	height:600px;
 }
 
 #pjs{
