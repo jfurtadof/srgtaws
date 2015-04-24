@@ -36,7 +36,6 @@ function log () {
 }
 
 function processUserInfo(info){
-	//alert(info);
 if(info.error){
 		log("Erro: "+info.message);
 		searchAgain();
@@ -48,9 +47,10 @@ if(info.error){
 	var url = info.user.url;
 	var local = info.user.country;
 
-
 	var tabela = document.getElementById("tabela");
-	$("#tabela").html("<p>Entrou processUserInfo</p>");
+	var formulario = document.getElementById("formulario");
+
+	$('#formulario').css('display', 'none');	
 	$('#tabela').html("<a href='"+url+"'>"+name+"</a><br>"+age+" years old<table></table>");
 }
 }
