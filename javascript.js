@@ -93,5 +93,59 @@ function processUserFriends(data){
 	for (var i = 0; i < data.friends.user.length; i++){
 		amigos[i] = data.friends.user[i].name;
 	}
-	$.get(base_url, data).done(addData(amigos.length, topTracks, playlists, topArtists, w, h));
+	$.get(processUserFriends).done(getLovedTracks());
+}
+
+function getLovedTracks(pageNumber){
+
+		var data = {
+			api_key: apikey,
+			method: "user.getLovedTracks",
+			user: username,
+			format: "json"
+		};
+		$.get(base_url, data).done(processLovedTracks);
+}
+
+function processLovedTracks(data){
+	for (var i = 0; i < data.lovedtracks.track.length; i++){
+		topTracks[i] = data.lovedtracks.track[i].name;
+	}
+	$.get(processUserFriends).done(getTopArtists());
+}
+
+function getPlaylists(pageNumber){
+
+		var data = {
+			api_key: apikey,
+			method: "user.getPlaylists",
+			user: username,
+			format: "json"
+		};
+		$.get(base_url, data).done(processPlaylistsTracks);
+}
+
+function processPlaylistsTracks(data){
+	for (var i = 0; i < data.lovedtracks.track.length; i++){
+		topTracks[i] = data.lovedtracks.track[i].name;
+	}
+	$.get(processUserFriends).done(getTopArtists());
+}
+
+function getTopArtists(pageNumber)
+{
+	var data = {
+		api_key: apikey,
+		method: "user.getTopArtists",
+		user: username,
+		format: "json"
+	};
+	$.get(base_url, data).done(processTopArtists);
+}
+
+function processTopArtists(data){
+	for (var i = 0; i < data.topartists.artist.length; i++){
+		topArtists[i] = data.topartists.artist[i].name;
+	}
+	$.get(base_url, data).done(addData(amigos.length, topTracks.length, playlists, topArtists.length, w, h));
 }
