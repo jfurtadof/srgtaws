@@ -1,6 +1,13 @@
+#tabela{
+	display: block;
+	position:absolute;
+	z-index: 0;
+
+}
+
 
 #toPjs{
-	display:block;
+	display:none;
     position:absolute;
     overflow:hidden;
 	z-index: 0;

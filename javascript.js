@@ -23,7 +23,6 @@ function getUserInfo(){
 		user: username,
 		format: "json"
 	};
-
 	$.get(base_url, data).done(processUserInfo);
 }
 
@@ -32,8 +31,14 @@ function logError() {
 }
 
 function log () {
-	alert (this);
+	//alert (this);
 }
+
+function procura(){
+	username = username2;
+	getUserInfo();
+}
+
 
 function processUserInfo(info){
 	if(info.error){
@@ -51,11 +56,14 @@ function processUserInfo(info){
 		var formulario = document.getElementById("formulario");
 
 		$('#formulario').css('display', 'none');
+		$('#toPjs').css('display', 'block');
 		$('#tabela').html("<a href='"+url+"'>"+name+"</a><br>"+age+" years old<table></table>");
+		$.get(processUserInfo).done(getUserFriends(1));
 	}
 }
 
 var proc;
+
 
 var amigos = new Array();
 var topTracks = new Array();
@@ -64,18 +72,26 @@ var topArtists = new Array();
 var w = new Array();
 var h = new Array();
 
-
-function addData(){
+function addData(amigos, topTracks, playlists, topArtists, w, h){
 	proc = Processing.getInstanceById('pjs');
-	proc.teste();
-//	proc.atualizaDados(amigos, topTracks, playlists, topArtists, w, h);
+	proc.atualizaDados(amigos, topTracks, playlists, topArtists, w, h);
 }
 
-/*
-function receiveProc(){
-	proc = Processing.getInstanceById('pjs');
-	var link = proc.mandaLink();
-	return link;
-	alert("iiii");
+function getUserFriends(pageNumber){
+	var data = {
+		api_key: apikey,
+		method: "user.getFriends",
+		user: username,
+		page: pageNumber,
+		limit: 50,
+		format: "json"
+	};
+	$.get(base_url, data).done(processUserFriends);
+}
 
-}*/
+function processUserFriends(data){
+	for (var i = 0; i < data.friends.user.length; i++){
+		amigos[i] = data.friends.user[i].name;
+	}
+	$.get(base_url, data).done(addData(amigos.length, topTracks, playlists, topArtists, w, h));
+}
