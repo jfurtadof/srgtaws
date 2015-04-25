@@ -1,15 +1,15 @@
 <html>
 <head>
-<title>FACIO</title>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<title>FACIO</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 
-<script type="text/javascript" src="jquery-1.11.0.min.js"></script>
+	<script type="text/javascript" src="jquery-1.11.0.min.js"></script>
 
-<script type="text/javascript" src="processing-1.4.1.min.js"></script>
+	<script type="text/javascript" src="processing-1.4.1.min.js"></script>
 
-<link rel="stylesheet" type="text/css" href="css/style.css">
+	<link rel="stylesheet" type="text/css" href="css/style.css">
 
-<script type="text/javascript" src="javascript.js"></script>
+	<script type="text/javascript" src="javascript.js"></script>
 
 </head>
 <body>
@@ -18,8 +18,8 @@
 var username2 ;
 $(document).ready(function(){
 	username2 = <?echo '"'.$_GET[s].'"';?>;
-
-   procura();
+	alert(username2);
+	procura();
 });
 </script>
 

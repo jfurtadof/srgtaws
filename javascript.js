@@ -22,8 +22,8 @@ function getUserInfo(){
 }
 
 function logError(activity) {
-return function(data){
-}
+	return function(data){
+	}
 }
 
 function log () {
@@ -36,7 +36,6 @@ function procura(){
 
 
 function processUserInfo(info){
-
 	if(info.error){
 		log("Erro: "+info.message);
 	} else {
@@ -66,7 +65,6 @@ var vizinhos = new Array();
 var topAlbuns = new Array();
 var topTags = new Array();
 
-
 function addData(amigos, topTracks, playlists, topArtists, eventos, vizinhos, topAlbuns, topTags){
 	proc = Processing.getInstanceById('pjs');
 	proc.atualizaDados(amigos, topTracks, playlists, topArtists, eventos, vizinhos, topAlbuns, topTags);
@@ -81,50 +79,49 @@ function getUserFriends(pageNumber){
 		limit: 50,
 		format: "json"
 	};
-	$.get(base_url, data).done(processUserFriends).fail(logError("Erro"));
+	$.get(base_url, data).done(processUserFriends);
 }
 
 function processUserFriends(data){
 	for (var i = 0; i < data.friends.user.length; i++){
 		amigos[i] = data.friends.user[i].name;
 	}
-	$.get(processUserFriends).done(getLovedTracks()).fail(logError("Erro"));
+	$.get(processUserFriends).done(getLovedTracks());
 }
 
 function getLovedTracks(pageNumber){
-
-		var data = {
-			api_key: apikey,
-			method: "user.getLovedTracks",
-			user: username,
-			format: "json"
-		};
-		$.get(base_url, data).done(processLovedTracks).fail(logError("Erro"));
+	var data = {
+		api_key: apikey,
+		method: "user.getLovedTracks",
+		user: username,
+		format: "json"
+	};
+	$.get(base_url, data).done(processLovedTracks);
 }
 
 function processLovedTracks(data){
 	for (var i = 0; i < data.lovedtracks.track.length; i++){
 		topTracks[i] = data.lovedtracks.track[i].name;
 	}
-	$.get(processUserFriends).done(getTopArtists()).fail(logError("Erro"));
+	$.get(processUserFriends).done(getTopArtists());
 }
 
 function getPlaylists(pageNumber){
-
-		var data = {
-			api_key: apikey,
-			method: "user.getPlaylists",
-			user: username,
-			format: "json"
-		};
-		$.get(base_url, data).done(processPlaylistsTracks).fail(logError("Erro"));
+	var data = {
+		api_key: apikey,
+		method: "user.getPlaylists",
+		user: username,
+		format: "json"
+	};
+	$.get(base_url, data).done(processPlaylistsTracks);
 }
 
 function processPlaylistsTracks(data){
-	for (var i = 0; i < data.lovedtracks.track.length; i++){
-		topTracks[i] = data.lovedtracks.track[i].name;
+	for (var i = 0; i < data.playliststracks.playlist.length; i++){
+		playlists[i] = data.playliststracks.playlist[i].name;
 	}
-	$.get(processUserFriends).done(getTopArtists()).fail(logError("Erro"));
+	alert(playlists);
+	$.get(processUserFriends).done(getTopArtists());
 }
 
 function getTopArtists(pageNumber)
@@ -135,14 +132,14 @@ function getTopArtists(pageNumber)
 		user: username,
 		format: "json"
 	};
-	$.get(base_url, data).done(processTopArtists).fail(logError("Erro"));
+	$.get(base_url, data).done(processTopArtists);
 }
 
 function processTopArtists(data){
 	for (var i = 0; i < data.topartists.artist.length; i++){
 		topArtists[i] = data.topartists.artist[i].name;
 	}
-	$.get(base_url, data).done(getUserEvents()).fail(logError("Erro"));
+	$.get(base_url, data).done(getUserEvents());
 }
 
 function getUserEvents()
@@ -154,16 +151,15 @@ function getUserEvents()
 		format: "json"
 	};
 
-	$.get(base_url, data).done(processUserEvents).fail(logError("Erro"));
+	$.get(base_url, data).done(processUserEvents);
 }
 
 
 function processUserEvents(data){
-		for (var i = 0; i < data.events.event.length; i++) {
-			eventos[i] = data.events.event[i].artists.artist;
-		}
-
-		$.get(processUserEvents).done(getUserNeighbours).fail(logError("Erro"));
+	for (var i = 0; i < data.events.event.length; i++) {
+		eventos[i] = data.events.event[i].artists.artist;
+	}
+	$.get(processUserEvents).done(getUserNeighbours);
 
 }
 
@@ -177,7 +173,7 @@ function getUserNeighbours()
 		format: "json"
 	};
 
-	$.get(base_url, data).done(processUserNeighbours).fail(logError("Erro"));
+	$.get(base_url, data).done(processUserNeighbours);
 }
 
 function processUserNeighbours(data)
@@ -187,7 +183,7 @@ function processUserNeighbours(data)
 			vizinhos[i] = data.neighbours.user[i].name;
 		}
 	}
-	$.get(processUserNeighbours).done(getTopAlbuns()).fail(logError("Erro"));
+	$.get(processUserNeighbours).done(getTopAlbuns());
 }
 
 function getTopAlbuns()
@@ -200,14 +196,14 @@ function getTopAlbuns()
 		format: "json"
 	};
 
-	$.get(base_url, data).done(processTopAlbuns).fail(logError("Erro"));
+	$.get(base_url, data).done(processTopAlbuns);
 }
 
 function processTopAlbuns(data){
 	for (var i = 0; i < data.topalbuns.album.length; i++){
 		topAlbuns[i] = data.topalbuns.album[i].name;
 	}
-	$.get(base_url, data).done(getTopTags()).fail(logError("Erro"));
+	$.get(base_url, data).done(getTopTags());
 }
 
 
@@ -228,5 +224,5 @@ function processTopTags(data){
 	for (var i = 0; i < data.toptags.tag.length; i++){
 		topTags[i] = data.toptags.tag[i].name;
 	}
-	$.get(base_url, data).done(addData(amigos, topTracks, playlists, topArtists, eventos, vizinhos, topAlbuns, topTags)).fail(logError("Erro"));
+	$.get(processTopTags).done(addData(amigos, topTracks, playlists, topArtists, eventos, vizinhos, topAlbuns, topTags));
 }

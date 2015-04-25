@@ -1,46 +1,50 @@
-int nAmigos = 20;
-int nTopTracks = 20;
-int nPlaylists = 20;
-int nTopArtists = 20;
-int nEventos = 20;
-int nVizinhos = 20;
-int nTopAlbuns = 20;
-int nTopTags = 20;
+int nAmigos = 0;
+int nTopTracks = 0;
+int nPlaylists = 0;
+int nTopArtists = 0;
+int nEventos = 0;
+int nVizinhos = 0;
+int nTopAlbuns = 0;
+int nTopTags = 0;
 
-int[] horizontais = {
+boolean rectOver1 = false; 
+boolean rectOver2 = false; 
+boolean rectOver3 = false;  
+boolean rectOver4 = false; 
+boolean rectOver5 = false; 
+boolean rectOver6 = false; 
+boolean rectOver7 = false; 
+boolean rectOver8 = false; 
+
+int[] verticais = {
   nAmigos, nTopTracks, nPlaylists, nTopArtists, nEventos, nVizinhos, nTopAlbuns, nTopTags
 };
 
 float xPos, yPos;
 
-Barras[] barrasHorizontais = new Barra[horizontais.length];
+Barras[] barrasVerticais = new Barra[verticais.length];
 
 void setup() {
   size(700, 700);
-//  background(180, 30, 30);
-  background(0, 0, 255);
+  background(180, 30, 30);
 }
 
-void draw() {
+void draw() {  
   for (int i=0; i<8; i++) {
-    xPos = 225;
-    yPos = (i*40)+150;
+    xPos = (i*40)+180;
+    yPos = 350-(verticais[i]*5);
 
-    barrasHorizontais[i] = new Barras(horizontais[i]*5);
+    barrasVerticais[i] = new Barras(verticais[i]*5);
 
-    barrasHorizontais[i].mudaLocal(xPos, yPos);
+    barrasVerticais[i].mudaLocal(xPos, yPos);
 
-    if (mouseX > xPos && mouseY > yPos && mouseX < xPos + horizontais[i]*10 && mouseY < yPos + 20) {
-      barrasHorizontais[i].mudaAlpha(255);
-    }
-    barrasHorizontais[i].desenhaBarrasHorizontais();
+    barrasVerticais[i].desenhaBarrasVerticais();
   }
 }
 
-
 class Barras {
   float x, y;
-  int r, g, b, a, compri;
+  int r, g, b, compri;
 
   Barras(int _compri) {
     x = width/2;
@@ -48,7 +52,6 @@ class Barras {
     r = 255;
     g = 255;
     b = 255;
-    a = 150;
     compri = _compri;
   }
 
@@ -57,20 +60,15 @@ class Barras {
     y = _y;
   }
 
-  void mudaAlpha(int _a) {
-    a = _a;
-  }
-
-  void desenhaBarrasHorizontais() {
-    noStroke();
-    fill(r, g, b, a);
-    rectMode(CORNER);
-    rect(x, y, compri, 20);
+  void mudaCor(int _r, int _g, int _b) {
+    r = _r;
+    g = _g;
+    b = _b;
   }
 
   void desenhaBarrasVerticais() {
     noStroke();
-    fill(r, g, b, a);
+    fill(r, g, b);
     rectMode(CORNER);
     rect(x, y, 20, compri);
   }
@@ -86,7 +84,7 @@ void atualizaDados(int amigos, int topTracks, int playlists, int topArtists, int
   nTopAlbuns = topAlbuns;
   nTopTags = topTags;
 
-  //horizontais = { nAmigos, nTopTracks, nPlaylists, nTopArtists, nEventos, nVizinhos, nTopAlbuns, nTopTags };
-  alert(horizontais);
+ int[] verticais = { nAmigos, nTopTracks, nPlaylists, nTopArtists, nEventos, nVizinhos, nTopAlbuns, nTopTags};
+  alert(verticais);
 }
 
