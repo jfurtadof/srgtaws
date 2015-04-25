@@ -19,10 +19,7 @@ var username2 ;
 $(document).ready(function(){
 	username2 = <?echo '"'.$_GET[s].'"';?>;
 
-   alert(username2);
-   //document.write(username2);
    procura();
-
 });
 </script>
 

@@ -17,15 +17,16 @@ function getUserInfo(){
 		user: username,
 		format: "json"
 	};
-	$.get(base_url, data).done(processUserInfo);
+
+	$.get(base_url, data).done(processUserInfo).fail(logError("Erro"));
 }
 
-function logError() {
-	alert("nop");
+function logError(activity) {
+return function(data){
+}
 }
 
 function log () {
-	//alert (this);
 }
 
 function procura(){
@@ -35,9 +36,9 @@ function procura(){
 
 
 function processUserInfo(info){
+
 	if(info.error){
 		log("Erro: "+info.message);
-		searchAgain();
 	} else {
 		var name = info.user.name;
 		var age = info.user.age;
@@ -50,7 +51,7 @@ function processUserInfo(info){
 		$('#formulario').css('display', 'none');
 		$('#toPjs').css('display', 'block');
 		$('#tabela').html("<a href='"+url+"'>"+name+"</a><br>"+age+" years old<table></table>");
-		$.get(processUserInfo).done(getUserFriends(1));
+		$.get(processUserInfo).done(getUserFriends(1)).fail(logError("Erro"));
 	}
 }
 
@@ -80,14 +81,14 @@ function getUserFriends(pageNumber){
 		limit: 50,
 		format: "json"
 	};
-	$.get(base_url, data).done(processUserFriends);
+	$.get(base_url, data).done(processUserFriends).fail(logError("Erro"));
 }
 
 function processUserFriends(data){
 	for (var i = 0; i < data.friends.user.length; i++){
 		amigos[i] = data.friends.user[i].name;
 	}
-	$.get(processUserFriends).done(getLovedTracks());
+	$.get(processUserFriends).done(getLovedTracks()).fail(logError("Erro"));
 }
 
 function getLovedTracks(pageNumber){
@@ -98,14 +99,14 @@ function getLovedTracks(pageNumber){
 			user: username,
 			format: "json"
 		};
-		$.get(base_url, data).done(processLovedTracks);
+		$.get(base_url, data).done(processLovedTracks).fail(logError("Erro"));
 }
 
 function processLovedTracks(data){
 	for (var i = 0; i < data.lovedtracks.track.length; i++){
 		topTracks[i] = data.lovedtracks.track[i].name;
 	}
-	$.get(processUserFriends).done(getTopArtists());
+	$.get(processUserFriends).done(getTopArtists()).fail(logError("Erro"));
 }
 
 function getPlaylists(pageNumber){
@@ -116,14 +117,14 @@ function getPlaylists(pageNumber){
 			user: username,
 			format: "json"
 		};
-		$.get(base_url, data).done(processPlaylistsTracks);
+		$.get(base_url, data).done(processPlaylistsTracks).fail(logError("Erro"));
 }
 
 function processPlaylistsTracks(data){
 	for (var i = 0; i < data.lovedtracks.track.length; i++){
 		topTracks[i] = data.lovedtracks.track[i].name;
 	}
-	$.get(processUserFriends).done(getTopArtists());
+	$.get(processUserFriends).done(getTopArtists()).fail(logError("Erro"));
 }
 
 function getTopArtists(pageNumber)
@@ -134,14 +135,14 @@ function getTopArtists(pageNumber)
 		user: username,
 		format: "json"
 	};
-	$.get(base_url, data).done(processTopArtists);
+	$.get(base_url, data).done(processTopArtists).fail(logError("Erro"));
 }
 
 function processTopArtists(data){
 	for (var i = 0; i < data.topartists.artist.length; i++){
 		topArtists[i] = data.topartists.artist[i].name;
 	}
-	$.get(base_url, data).done(getUserEvents());
+	$.get(base_url, data).done(getUserEvents()).fail(logError("Erro"));
 }
 
 function getUserEvents()
@@ -153,7 +154,7 @@ function getUserEvents()
 		format: "json"
 	};
 
-	$.get(base_url, data).done(processUserEvents);
+	$.get(base_url, data).done(processUserEvents).fail(logError("Erro"));
 }
 
 
@@ -162,8 +163,8 @@ function processUserEvents(data){
 			eventos[i] = data.events.event[i].artists.artist;
 		}
 
-		$.get(processUserNextEvents).done(getUserNeighbours);
-	}
+		$.get(processUserEvents).done(getUserNeighbours).fail(logError("Erro"));
+
 }
 
 function getUserNeighbours()
@@ -176,7 +177,7 @@ function getUserNeighbours()
 		format: "json"
 	};
 
-	$.get(base_url, data).done(processUserNeighbours);
+	$.get(base_url, data).done(processUserNeighbours).fail(logError("Erro"));
 }
 
 function processUserNeighbours(data)
@@ -186,7 +187,7 @@ function processUserNeighbours(data)
 			vizinhos[i] = data.neighbours.user[i].name;
 		}
 	}
-	$.get(processUserNeighbours).done(getTopAlbuns());
+	$.get(processUserNeighbours).done(getTopAlbuns()).fail(logError("Erro"));
 }
 
 function getTopAlbuns()
@@ -199,14 +200,14 @@ function getTopAlbuns()
 		format: "json"
 	};
 
-	$.get(base_url, data).done(processTopAlbuns);
+	$.get(base_url, data).done(processTopAlbuns).fail(logError("Erro"));
 }
 
 function processTopAlbuns(data){
 	for (var i = 0; i < data.topalbuns.album.length; i++){
 		topAlbuns[i] = data.topalbuns.album[i].name;
 	}
-	$.get(base_url, data).done(getTopTags());
+	$.get(base_url, data).done(getTopTags()).fail(logError("Erro"));
 }
 
 
@@ -220,12 +221,12 @@ function getTopTags()
 		format: "json"
 	};
 
-	$.get(base_url, data).done(processTopTags);
+	$.get(base_url, data).done(processTopTags).fail(logError("Erro"));
 }
 
 function processTopTags(data){
 	for (var i = 0; i < data.toptags.tag.length; i++){
 		topTags[i] = data.toptags.tag[i].name;
 	}
-	$.get(base_url, data).done(addData(amigos, topTracks, playlists, topArtists, eventos, vizinhos, topAlbuns, topTags));
+	$.get(base_url, data).done(addData(amigos, topTracks, playlists, topArtists, eventos, vizinhos, topAlbuns, topTags)).fail(logError("Erro"));
 }
