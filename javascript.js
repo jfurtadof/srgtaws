@@ -7,14 +7,8 @@ var apikey = "5a429fc03f1015f9fe983a57b5d54e97";
 // URL base para pedidos à API do Last.fm - concatenar em cada pedido com nome do método a invocar e parâmetros do mesmo
 var base_request = "http://ws.audioscrobbler.com/2.0/?api_key=5a429fc03f1015f9fe983a57b5d54e97&format=json&method=";
 
-
 // Nome do utilizador a analisar
 var username;
-
-// Array associativo com nome do utilizador como chave e valor de amizade como valor
-var amigos = {};
-
-var banda;
 
 function getUserInfo(){
 	var data = {
@@ -44,9 +38,7 @@ function processUserInfo(info){
 	if(info.error){
 		log("Erro: "+info.message);
 		searchAgain();
-	}
-	else{
-
+	} else {
 		var name = info.user.name;
 		var age = info.user.age;
 		var url = info.user.url;
@@ -64,17 +56,19 @@ function processUserInfo(info){
 
 var proc;
 
-
 var amigos = new Array();
 var topTracks = new Array();
 var playlists = new Array();
 var topArtists = new Array();
-var w = new Array();
-var h = new Array();
+var eventos = new Array();
+var vizinhos = new Array();
+var topAlbuns = new Array();
+var topTags = new Array();
 
-function addData(amigos, topTracks, playlists, topArtists, w, h){
+
+function addData(amigos, topTracks, playlists, topArtists, eventos, vizinhos, topAlbuns, topTags){
 	proc = Processing.getInstanceById('pjs');
-	proc.atualizaDados(amigos, topTracks, playlists, topArtists, w, h);
+	proc.atualizaDados(amigos, topTracks, playlists, topArtists, eventos, vizinhos, topAlbuns, topTags);
 }
 
 function getUserFriends(pageNumber){
@@ -147,5 +141,91 @@ function processTopArtists(data){
 	for (var i = 0; i < data.topartists.artist.length; i++){
 		topArtists[i] = data.topartists.artist[i].name;
 	}
-	$.get(base_url, data).done(addData(amigos.length, topTracks.length, playlists, topArtists.length, w, h));
+	$.get(base_url, data).done(getUserEvents());
+}
+
+function getUserEvents()
+{
+	var data = {
+		api_key: apikey,
+		method: "user.getEvents",
+		user: username,
+		format: "json"
+	};
+
+	$.get(base_url, data).done(processUserEvents);
+}
+
+
+function processUserEvents(data){
+		for (var i = 0; i < data.events.event.length; i++) {
+			eventos[i] = data.events.event[i].artists.artist;
+		}
+
+		$.get(processUserNextEvents).done(getUserNeighbours);
+	}
+}
+
+function getUserNeighbours()
+{
+	var data = {
+		api_key: apikey,
+		method: "user.getNeighbours",
+		user: username,
+		limit: 50,
+		format: "json"
+	};
+
+	$.get(base_url, data).done(processUserNeighbours);
+}
+
+function processUserNeighbours(data)
+{
+	if (typeof data.neighbours.user.length == "number"){
+		for (var i = 0; i < data.neighbours.user.length; i++) {
+			vizinhos[i] = data.neighbours.user[i].name;
+		}
+	}
+	$.get(processUserNeighbours).done(getTopAlbuns());
+}
+
+function getTopAlbuns()
+{
+	var data = {
+		api_key: apikey,
+		method: "user.getTopAlbuns",
+		user: username,
+		limit: 50,
+		format: "json"
+	};
+
+	$.get(base_url, data).done(processTopAlbuns);
+}
+
+function processTopAlbuns(data){
+	for (var i = 0; i < data.topalbuns.album.length; i++){
+		topAlbuns[i] = data.topalbuns.album[i].name;
+	}
+	$.get(base_url, data).done(getTopTags());
+}
+
+
+function getTopTags()
+{
+	var data = {
+		api_key: apikey,
+		method: "user.getTopTags",
+		user: username,
+		limit: 50,
+		format: "json"
+	};
+
+	$.get(base_url, data).done(processTopTags);
+}
+
+function processTopTags(data){
+	for (var i = 0; i < data.toptags.tag.length; i++){
+		topTags[i] = data.toptags.tag[i].name;
+	}
+	$.get(base_url, data).done(addData(amigos, topTracks, playlists, topArtists, eventos, vizinhos, topAlbuns, topTags));
 }
