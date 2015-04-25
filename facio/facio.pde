@@ -1,11 +1,11 @@
-int nAmigos = 20;
-int nTopTracks = 20;
-int nPlaylists = 20;
-int nTopArtists = 20;
-int nEventos = 20;
-int nVizinhos = 20;
-int nTopAlbuns = 20;
-int nTopTags = 20;
+int nAmigos = 0;
+int nTopTracks = 0;
+int nPlaylists = 0;
+int nTopArtists = 0;
+int nEventos = 0;
+int nVizinhos = 0;
+int nTopAlbuns = 0;
+int nTopTags = 0;
 
 int[] horizontais = {
   nAmigos, nTopTracks, nPlaylists, nTopArtists, nEventos, nVizinhos, nTopAlbuns, nTopTags
@@ -77,15 +77,15 @@ class Barras {
 }
 
 void atualizaDados(int amigos, int topTracks, int playlists, int topArtists, int eventos, int vizinhos, int topAlbuns, int topTags) {
-  /*nAmigos = amigos;
+  nAmigos = amigos;
   nTopTracks = topTracks;
   nPlaylists = playlists;
   nTopArtists = topArtists;
   nEventos = eventos;
   nVizinhos = vizinhos;
   nTopAlbuns = topAlbuns;
-  nTopTags = topTags;*/
+  nTopTags = topTags;
 
-  //horizontais = { nAmigos, nTopTracks, nPlaylists, nTopArtists, nEventos, nVizinhos, nTopAlbuns, nTopTags };
+  horizontais = { nAmigos, nTopTracks, nPlaylists, nTopArtists, nEventos, nVizinhos, nTopAlbuns, nTopTags};
   alert(horizontais);
 }
