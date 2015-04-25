@@ -1,35 +1,28 @@
-/* API LAST.FM
- ALBUM  -getInfo
- ARTIST -getSimilar, getEvents
- EVENT
- GEO - XgetEvents
- USER - getFriends,getLovedTrack,getPlaylist,getTopArtists
- VENUE -getEvents
- */
-
 int nAmigos = 0;
 int nTopTracks = 0;
 int nPlaylists = 0;
 int nTopArtists = 0;
+int nEventos = 0;
+int nVizinhos = 0;
+int nTopAlbuns = 0;
+int nTopTags = 0;
 
 int[] horizontais = {
-  nAmigos, nTopTracks, nPlaylists, nTopArtists
+  nAmigos, nTopTracks, nPlaylists, nTopArtists, nEventos, nVizinhos, nTopAlbuns, nTopTags
 };
 
 float xPos, yPos;
 
 Barras[] barrasHorizontais = new Barra[horizontais.length];
-Barras[] barrasVerticais;
 
 void setup() {
   size(700, 700);
 //  background(180, 30, 30);
   background(0, 0, 255);
-  font = loadFont("data/Sabado-26.vlw");
 }
 
 void draw() {
-  for (int i=0; i<4; i++) {
+  for (int i=0; i<8; i++) {
     xPos = 225;
     yPos = (i*40)+150;
 
@@ -83,13 +76,17 @@ class Barras {
   }
 }
 
-void atualizaDados(int amigos, int topTracks, int playlists, int topArtists, int w, int h) {
+void atualizaDados(int amigos, int topTracks, int playlists, int topArtists, int eventos, int vizinhos, int topAlbuns, int topTags) {
   nAmigos = amigos;
   nTopTracks = topTracks;
   nPlaylists = playlists;
   nTopArtists = topArtists;
+  nEventos = eventos;
+  nVizinhos = vizinhos;
+  nTopAlbuns = topAlbuns;
+  nTopTags = topTags;
   alert(nAmigos);
 
-  horizontais = { nAmigos, nTopTracks, nPlaylists, nTopArtists };
+  horizontais = { nAmigos, nTopTracks, nPlaylists, nTopArtists, nEventos, nVizinhos, nTopAlbuns, nTopTags };
   alert(horizontais);
 }
